@@ -2,7 +2,7 @@
 
 De una manera resumida, el sistema grabará permanentemente el escaparate y la entrada de una tienda y contabilizará los usuarios que entran en ella; comparando con los usuarios que han pasado por delante de la misma.
 
-## Getting Started
+## Comenzando
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
@@ -70,19 +70,19 @@ Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c6
 
 We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
 
-## Authors
+## Autores
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **Gabriel Metola** - *Responsable de producto* - (https://github.com/GMetola)
+* **Francisco José Vega** - *Gestor de desarrollo* - (https://github.com/franjvega)
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+Vea una lista de participantes [contributors](https://github.com/your/project/contributors) que participaron en este proyecto.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the URJC License - see the [LICENSE.md](LICENSE.md) file for details
 
 ## Acknowledgments
 
 * Hat tip to anyone whose code was used
 * Inspiration
 * etc
-

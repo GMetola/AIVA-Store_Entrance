@@ -12,4 +12,4 @@ Por lo tanto, no existen requisitos previos para el disfrute de esta tecnología
 * **Gabriel Metola** - *Responsable de producto* - (https://github.com/GMetola)
 * **Francisco José Vega** - *Gestor de desarrollo* - (https://github.com/franjvega)
 
-Vea una lista de participantes [contributors](https://github.com/your/project/contributors) que participaron en este proyecto.
+Vea una lista de participantes [contributors](https://github.com/GMetola/AIVA-Store_Entrance/graphs/contributors) que participaron en este proyecto.

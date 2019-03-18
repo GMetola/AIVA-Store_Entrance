@@ -3,54 +3,54 @@ import argparse
 import numpy as np
 
 
-def mean(imagepast, image):
-    imagepast = cv.cvtColor(imagepast, cv.COLOR_BGR2GRAY)
-    img = cv.cvtColor(image, cv.COLOR_BGR2GRAY)
-    imagepast = imagepast.astype('double')
-    img = img.astype('double')
+def mean(background, frame):
+    background = cv.cvtColor(background, cv.COLOR_BGR2GRAY)
+    frame = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
+    background = background.astype('double')
+    frame = frame.astype('double')
 
-    imagefin = np.abs(np.array(img) - np.array(imagepast))
+    movement = np.abs(np.array(frame) - np.array(background))
 
-    imagefin = imagefin.astype('uint8')
-    imagefin[imagefin < 110] = 0
-    imagefin[imagefin > 111] = 255
-    return imagefin
-
-
-def filt(image):
-    image = cv.erode(image, (9, 9), iterations=4)
-    image = cv.dilate(image, (9, 9), iterations=4)
-    imagefin = cv.GaussianBlur(image, (5, 13), 0)
-    return imagefin
+    movement = movement.astype('uint8')
+    movement[movement < 110] = 0
+    movement[movement > 111] = 255
+    return movement
 
 
-def detect(image):
-    data = []
-    _, cont, _ = cv.findContours(image, cv.RETR_LIST, cv.CHAIN_APPROX_NONE)
+def filter(frame):
+    frame = cv.erode(frame, (9, 9), iterations=4)
+    frame = cv.dilate(frame, (9, 9), iterations=4)
+    filtered = cv.GaussianBlur(frame, (5, 13), 0)
+    return filtered
+
+
+def detect(frame):
+    people = []
+    _, cont, _ = cv.findContours(frame, cv.RETR_LIST, cv.CHAIN_APPROX_NONE)
 
     if len(cont) != 0:
-        c = max(cont, key= cv.contourArea)
+        c = max(cont, key=cv.contourArea)
         (x, y), radius = cv.minEnclosingCircle(c)
         if radius > 14:
-            # cv.circle(image, (int(x), int(y)), int(radius), 255, 2)
-            cv.rectangle(image, (int(x-10), int(y-20)),(int(x+10), int(y+20)), 255, 2)
-            data.append([int(x), int(y+20)])
+            # cv.circle(frame, (int(x), int(y)), int(radius), 255, 2)
+            cv.rectangle(frame, (int(x-10), int(y-20)), (int(x+10), int(y+20)), 255, 2)
+            people.append([int(x), int(y+20)])
 
-    return image, data
+    return frame, people
 
 
-def follow(data):
+def follow(people):
     cross = 0
-    noCross = 0
-    while len(data) > 0:
-        aux = data.pop()
+    no_cross = 0
+    while len(people) > 0:
+        aux = people.pop()
         # goes though the store's door
-        if aux[0] > 210 and aux[0] < 330 and aux[1] > 140 and aux[1] < 160:
-            cross = cross + 1
+        if 210 < aux[0] < 330 and 140 < aux[1] < 160:
+            cross += 1
         else:
-            noCross = noCross+1
+            no_cross += 1
 
-    return cross, noCross
+    return cross, no_cross
 
 
 def printer(fileData, c, noc, frame):
@@ -74,15 +74,17 @@ if not videoInput.isOpened():
     print("Error during video load.")
 
 
-ret, imagepast = videoInput.read()
+ret, past_image = videoInput.read()
 while videoInput.isOpened():
 
     ret, image = videoInput.read()
-    img = mean(imagepast, image)
-    img = filt(img)
+    if not ret:
+        break
+
+    img = mean(past_image, image)
+    img = filter(img)
     img, data = detect(img)
     c, noc = follow(data)
-
     printer(fileData, c, noc, int(videoInput.get(1)))
     cv.imshow("Frame", img)
     cv.waitKey(22)

@@ -1,7 +1,7 @@
 import cv2 as cv
 import argparse
 
-from AppsIndustriales import Classes
+from AIVA-Store_Entrance import Classes
 
 if __name__ == "__main__":
 
@@ -10,12 +10,13 @@ if __name__ == "__main__":
 	args = vars(ap.parse_args())
 
 	# we create the objects defined on "Classes"
-	Io = Classes.InOut()
+	Io = Classes.FileInOut()
 	It = Classes.ImageTreatment()
 	Ff = Classes.FindAndFollow()
+	Vd = Classes.VideoData()
 
 	fileData = Io.filecreator()
-	videoInput, imagepast = Io.videoin(args)
+	videoInput, imagepast = Vd.videoin(args)
 
 	while videoInput.isOpened():
 

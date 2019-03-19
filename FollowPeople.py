@@ -5,15 +5,17 @@ import numpy as np
 
 class StoreDetection:
     def __init__(self):
-        self.ap = ap
-        self.path_in = path_in
-        self.args = args
-        self.args_in = args_in
-        self.background = background
-        self.frame = frame
-        self.filtered = filtered
-        self.movement = movement
-        self.people = people
+        self.path_in
+        # self.ap = ap
+        # self.path_in = path_in
+        # self.args = args
+        # self.args_in = args_in
+        # self.background = background
+        # self.frame = frame
+        # self.filtered = filtered
+        # self.movement = movement
+        # self.people = people
+        return
 
     def open_video(self):
         ap = argparse.ArgumentParser()
@@ -52,7 +54,6 @@ class StoreDetection:
                 # cv.circle(frame, (int(x), int(y)), int(radius), 255, 2)
                 cv.rectangle(frame, (int(x-10), int(y-20)), (int(x+10), int(y+20)), 255, 2)
                 people.append([int(x), int(y+20)])
-
         return frame, people
 
     def follow(self):
@@ -65,15 +66,15 @@ class StoreDetection:
                 cross += 1
             else:
                 no_cross += 1
-
         return cross, no_cross
 
 
-class FileData(self):
+class FileData:
     def __init__(self):
-        self.frame = frame
-        self.c = c
-        self.noc = noc
+        # self.frame = frame
+        # self.c = c
+        # self.noc = noc
+        return
 
     def printer(self):
         self.fileData.write("Frame: " + str(self.frame) + ". People in image: " +
@@ -83,12 +84,14 @@ class FileData(self):
 
 if __name__ == '__main__':
 
+    fileData = FileData()
     try:
         fileData = open("results.csv", "w")
     except AttributeError:
         print("Couldn't create data {}".format())
 
-    videoInput = cv.VideoCapture(pathIn)
+    Video = StoreDetection()
+    videoInput = cv.VideoCapture(Video.path_in)
     if not videoInput.isOpened():
         print("Error during video load.")
 

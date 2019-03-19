@@ -72,7 +72,7 @@ class FindAndFollow:
         return cross, nocross
 
 
-class InOut:
+class FileInOut:
 """ Video and report_file management"""
 
     @staticmethod
@@ -84,6 +84,15 @@ class InOut:
             print("Couldn't create data {}".format())
         return fileData
 
+
+    @staticmethod
+    def printer(filedata, c, noc, frame):
+        """ writes an information line per frame on the csv """
+		filedata.write("Frame: " + str(frame) + ". People in image: " + str(noc) + ", People crossing: " + str(c) + "\r\n")
+        return
+
+
+class VideoData:
     @staticmethod
     def videoin(arg):
 		"""opens the video to be analyzed"""
@@ -95,9 +104,4 @@ class InOut:
         _, imagepast = videoInput.read()
         return videoInput, imagepast
 
-    @staticmethod
-    def printer(filedata, c, noc, frame):
-        """ writes an information line per frame on the csv """
-		filedata.write("Frame: " + str(frame) + ". People in image: " + str(noc) + ", People crossing: " + str(c) + "\r\n")
-        return
 

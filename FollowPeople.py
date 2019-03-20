@@ -1,7 +1,7 @@
 import cv2 as cv
 import argparse
 
-from AIVA-Store_Entrance import Classes
+import Classes
 
 if __name__ == "__main__":
 
@@ -21,8 +21,8 @@ if __name__ == "__main__":
 	while videoInput.isOpened():
 
 		ret, image = videoInput.read()
-			if not ret:
-				break
+		if not ret:
+			break
 		img = It.mean(imagepast, image)
 		img = It.clean(img)
 		img, data = Ff.detect(img)

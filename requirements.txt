@@ -6,9 +6,6 @@ imutils==0.5.1
 ipykernel==5.1.0
 Jinja2==2.10
 jsonschema==2.6.0
-jupyter-client==5.2.4
-jupyter-console==6.0.0
-jupyter-core==4.4.0
 matplotlib==3.0.0
 mpmath==1.1.0
 notebook==5.7.4

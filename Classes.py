@@ -48,7 +48,7 @@ class FindAndFollow:
         _, cont, _ = cv.findContours(image, cv.RETR_LIST, cv.CHAIN_APPROX_NONE)
 
         if len(cont) != 0:
-            c = max(cont, key= cv.contourArea)
+            c = max(cont, key=cv.contourArea)
             (x, y), radius = cv.minEnclosingCircle(c)
             # here a humble approximation of a person form (rectangle) and feet position (data)
             if radius > 14:
@@ -63,16 +63,16 @@ class FindAndFollow:
     def follow(data):
         """ cross increases in case data (feet) crosses the door area"""
         cross = 0
-        nocross = 0
+        no_cross = 0
         while len(data) > 0:
             aux = data.pop()
             # door area:
             if 210 < aux[0] < 330 and 140 < aux[1] < 160:
                 cross += 1
             else:
-                nocross += 1
+                no_cross += 1
         """returns the number of people inside the door area in the current frame"""
-        return cross, nocross
+        return cross, no_cross
 
 
 class FileInOut:
@@ -108,11 +108,11 @@ class VideoData:
     def videoin(arg):
         """opens the video to be analyzed"""
         path = arg["video"]
-        videoInput = cv.VideoCapture(path)
-        if not videoInput.isOpened():
+        video_input = cv.VideoCapture(path)
+        if not video_input.isOpened():
             print("Error during video load.")
 
-        _, imagepast = videoInput.read()
-        return videoInput, imagepast
+        _, imagepast = video_input.read()
+        return video_input, imagepast
 
 

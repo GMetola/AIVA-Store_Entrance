@@ -1,7 +1,11 @@
 from Classes import FindAndFollow
-import FollowPeople
 import unittest
-import cv2
+# import cv2
+
+print("hello world")
+import sys
+
+sys.path.append('/usr/local/lib/python2.7/site-packages')
 
 
 class TestStringMethods(unittest.TestCase):

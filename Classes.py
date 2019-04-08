@@ -38,29 +38,36 @@ class ImageTreatment:
 class FindAndFollow:
     """Detects objects moving and counts when they go through certain areas"""
 
+    __datacross = 0
+    __lastcountdatacross = 0
+    __datanocross = 0
+    __lastcountdatanocross = 0
+
     def __init__(self):
         return
 
     @staticmethod
-    def detect(image):
+    def detect(image,imageOriginal):
         """ given a boolean image, creates contours arround true (white) objects"""
         data = []
         _, cont, _ = cv.findContours(image, cv.RETR_LIST, cv.CHAIN_APPROX_NONE)
+        cnt = sorted(cont, key=cv.contourArea)
 
-        if len(cont) != 0:
-            c = max(cont, key=cv.contourArea)
+        while len(cnt) != 0:
+            c = cnt.pop()
             (x, y), radius = cv.minEnclosingCircle(c)
             # here a humble approximation of a person form (rectangle) and feet position (data)
-            if radius > 14:
-                # cv.circle(image, (int(x), int(y)), int(radius), 255, 2)
-                cv.rectangle(image, (int(x-10), int(y-20)), (int(x+10), int(y+20)), 255, 2)
+
+            if radius > 12:
+                cv.rectangle(imageOriginal, (int(x-10), int(y-30)), (int(x+10), int(y+20)), 255, 2)
                 data.append([int(x), int(y+20)])
+            else:
+                break
         """returns the bottom of the contours created.
         this bottom points are supposed to be feet of moving people (taken as reference)"""
-        return image, data
+        return imageOriginal, data
 
-    @staticmethod
-    def follow(data):
+    def follow(self, data):
         """ cross increases in case data (feet) crosses the door area"""
         cross = 0
         no_cross = 0
@@ -71,12 +78,37 @@ class FindAndFollow:
                 cross += 1
             else:
                 no_cross += 1
-        """returns the number of people inside the door area in the current frame"""
+
+        if cross > 0 and self.__datacross < cross:
+            self.__datacross = cross
+            self.__lastcountdatacross = 0
+        elif cross > 0 and self.__lastcountdatacross > 15:
+            self.__datacross = self.__datacross + 1
+            self.__lastcountdatacross = 0
+        elif cross == 0:
+            self.__lastcountdatacross = self.__lastcountdatacross + 1
+
+        if no_cross > 0 and self.__datanocross < no_cross:
+            self.__datanocross = no_cross
+            self.__lastcountdatanocross = 0
+        elif no_cross > 0 and self.__lastcountdatanocross > 15:
+            self.__datanocross = self.__datanocross + 1
+            self.__lastcountdatanocross = 0
+        elif no_cross == 0:
+            self.__lastcountdatanocross = self.__lastcountdatanocross + 1
+
+            """returns the number of people inside the door area in the current frame"""
         return cross, no_cross
+
+    def finalreport(self, filedata, inputoutput):
+
+        inputoutput.printer(filedata, self.__datacross, self.__datanocross, "Final")
+        return
 
 
 class FileInOut:
     """ Report_file management"""
+
 
     def __init__(self):
         return
@@ -85,7 +117,7 @@ class FileInOut:
     def filecreator():
         """ creates a file where data of the video will be stored"""
         try:
-            fileData = open("results.csv", "w")
+            fileData = open("results10.csv", "w")
         except AttributeError:
             print("Couldn't create data {}".format())
         return fileData
@@ -95,6 +127,7 @@ class FileInOut:
         """ writes an information line per frame on the csv """
         filedata.write("Frame: " + str(frame) + ". People in image: "
                        + str(noc) + ", People crossing: " + str(c) + "\r\n")
+
         return
 
 

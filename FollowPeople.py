@@ -3,10 +3,7 @@ import argparse
 import Classes
 
 
-def follow_people():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("-video", required=True, help="Path of the video.")
-    args = vars(ap.parse_args())
+def follow_people(args):
 
     # we create the objects defined on "Classes"
     inout = Classes.FileInOut()
@@ -37,4 +34,9 @@ def follow_people():
 
 
 if __name__ == "__main__":
-    follow_people()
+    
+	ap = argparse.ArgumentParser()
+    ap.add_argument("-video", required=True, help="Path of the video.")
+    args = vars(ap.parse_args())
+	
+    follow_people(args)

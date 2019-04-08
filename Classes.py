@@ -117,7 +117,7 @@ class FileInOut:
     def filecreator():
         """ creates a file where data of the video will be stored"""
         try:
-            fileData = open("results10.csv", "w")
+            fileData = open("results.csv", "w")
         except AttributeError:
             print("Couldn't create data {}".format())
         return fileData
@@ -127,7 +127,6 @@ class FileInOut:
         """ writes an information line per frame on the csv """
         filedata.write("Frame: " + str(frame) + ". People in image: "
                        + str(noc) + ", People crossing: " + str(c) + "\r\n")
-
         return
 
 

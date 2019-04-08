@@ -9,27 +9,28 @@ def follow_people():
     args = vars(ap.parse_args())
 
     # we create the objects defined on "Classes"
-    io = Classes.FileInOut()
-    it = Classes.ImageTreatment()
-    ff = Classes.FindAndFollow()
-    vd = Classes.VideoData()
+    inout = Classes.FileInOut()
+    imgtreat = Classes.ImageTreatment()
+    findfollow = Classes.FindAndFollow()
+    viddata = Classes.VideoData()
 
-    file_data = io.filecreator()
-    video_input, image_past = vd.videoin(args)
+    file_data = inout.filecreator()
+    video_input, image_past = viddata.videoin(args)
 
     while video_input.isOpened():
         ret, image = video_input.read()
         if not ret:
             break
-        img = it.mean(image_past, image)
-        img = it.clean(img)
-        img, data = ff.detect(img)
-        cross, no_cross = ff.follow(data)
+        img = imgtreat.mean(image_past, image)
+        img = imgtreat.clean(img)
+        img, data = findfollow.detect(img,image)
+        cross, no_cross = findfollow.follow(data)
 
-        io.printer(file_data, cross, no_cross, int(video_input.get(1)))
+        inout.printer(file_data, cross, no_cross, int(video_input.get(1)))
         cv.imshow("Frame", img)
         cv.waitKey(22)
 
+    findfollow.finalreport(file_data, inout)
     video_input.release()
     file_data.close()
     cv.destroyAllWindows()

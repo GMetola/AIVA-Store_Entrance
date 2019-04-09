@@ -7,10 +7,16 @@ De una manera resumida, el sistema grabará permanentemente el escaparate y la e
 Este código se puede descargar mediante un git clone sobre el url de esta pagina o mediante la pestaña download en la parte superior izquierda.
 
 Este código se puede ejecutar dentro de un sistema que contenga las librerias detalladas en el requirements.txt
+En cualquier caso, a través del docker "metolag/videoanalysis-peopledetector", podrá obtener todas las librerías necesarias.
 
-Para ejecutarlo hay que introducir un video en formato avi mediante la siguiente linea de codigo:
-  - python FollowPeople.py -video "nombre del video.avi"
-  
+Tras cargar el docker, debe entrar en la carpeta AIVA-Store_Entrance, descargada directamente de GitHub.
+Hay que introducir un vídeo en dicha carpeta del docker.
+Para ejecutar el programa deberá introducir el siguiente comando:
+  - python FollowPeople.py -video "nombre del video.extension"
+
+Para comodidad del usuario, se ha incluido un vídeo en el propio Git, por lo que, para realizar una prueba, puede ejecutar lo siguiente:
+- python FollowPeople.py -video EnterExitCrossingPaths1front.mpg
+
 El formato del video puede ser diferente y no ha de ir entre comillas.
 Los resultados se obtendran en la misma dirección donde este almacenado el codigo.
 

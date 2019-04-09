@@ -24,7 +24,8 @@ def follow_people(args):
         cross, no_cross = findfollow.follow(data)
 
         inout.printer(file_data, cross, no_cross, int(video_input.get(1)))
-        cv.imshow("Frame", img)
+        ### Esta linea se ha comentado para poder ejecutarlo desde Docker
+	#cv.imshow("Frame", img)
         cv.waitKey(22)
 
     findfollow.finalreport(file_data, inout)

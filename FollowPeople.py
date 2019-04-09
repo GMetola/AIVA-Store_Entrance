@@ -35,7 +35,7 @@ def follow_people(args):
 
 if __name__ == "__main__":
     
-	ap = argparse.ArgumentParser()
+    ap = argparse.ArgumentParser()
     ap.add_argument("-video", required=True, help="Path of the video.")
     args = vars(ap.parse_args())
 	

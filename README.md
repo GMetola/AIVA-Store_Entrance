@@ -11,6 +11,7 @@ Este código se puede ejecutar dentro de un sistema que contenga las librerias d
 Para ejecutarlo hay que introducir un video en formato avi mediante la siguiente linea de codigo:
   - python FollowPeople.py -video "nombre del video.avi"
   
+El formato del video puede ser diferente y no ha de ir entre comillas.
 Los resultados se obtendran en la misma dirección donde este almacenado el codigo.
 
 #### Ayuda

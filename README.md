@@ -7,7 +7,10 @@ De una manera resumida, el sistema grabará permanentemente el escaparate y la e
 Este código se puede descargar mediante un git clone sobre el url de esta pagina o mediante la pestaña download en la parte superior izquierda.
 
 Este código se puede ejecutar dentro de un sistema que contenga las librerias detalladas en el requirements.txt
-En cualquier caso, a través del docker "metolag/videoanalysis-peopledetector", podrá obtener todas las librerías necesarias.
+
+## Implantación a través de docker
+Por comodidad para el usuario, hemos habilitado un container de docker descargable aquí (https://hub.docker.com/r/metolag/videoanalysis-peopledetector)
+A través del docker "metolag/videoanalysis-peopledetector", podrá obtener todas las librerías necesarias.
 
 Tras cargar el docker, debe entrar en la carpeta AIVA-Store_Entrance, descargada directamente de GitHub.
 Hay que introducir un vídeo en dicha carpeta del docker.
